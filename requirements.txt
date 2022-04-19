@@ -1,0 +1,29 @@
+# base
+pandas == 1.4.1
+jupyter
+
+# chapter 2
+beautifulsoup4
+requests-html
+requests
+matplotlib
+seaborn
+jieba
+pyecharts
+
+# chapter 6
+openpyxl
+
+# chapter 7
+SQLAlchemy
+
+# chapter 10
+pyjanitor
+bokeh
+statsmodels
+
+# projects
+click >= 8.0.1
+scikit-learn
+scrapy
+fastapi
