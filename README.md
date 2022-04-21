@@ -6,6 +6,8 @@
 
 在使用前需要将本仓库的项目下载后再通过 IDE 打开。
 
+> 注：如果是通过 ZIP 下载方式下载本项目，默认会选择主干分支（master branch），解压之后得到的目录名称会带有 `-master` 后缀，此时最好是将该后缀去掉，重名命为 `sspai-100-hours-series-python`，以便和本文中的示例代码保持一致。
+
 ## 环境依赖安装
 
 参照教程内容安装好 Python 解释器、镜像配置以及设置相关的 IDE 之后，进入到该项目路径下，使用对应 Python 解释器的 `pip` 命令来进行安装 `requirements.txt` 文件中的依赖。
@@ -32,13 +34,13 @@ which python3
 
 ```bash
 cd ./sspai-100-hours-series-python
-python3 -m pip install -r ./requirement.txt
+python3 -m pip install -r ./requirements.txt
 ```
 
 方式二：
 
 ```bash
-pip install -r ./requirement.txt
+pip install -r ./requirements.txt
 ```
 
 ## 项目使用
