@@ -2,6 +2,11 @@
 
 本仓库为少数派平台 [《100 小时后请叫我程序员》](https://sspai.com/series/271) 教程内容的相关源码、以及素材仓库，教程内的大部分示例代码都可通过对应的目录找到。
 
+仓库地址：
+
+- [Gitee](https://gitee.com/tinybot/sspai-100-hours-series-python)（国内）
+- [Github](https://github.com/100gle/sspai-100-hours-series-python)
+
 在使用过程中如有任何问题欢迎在少数派私信我（推荐方式），或者在本仓库上面的 Issues 页面中提问。
 
 在使用前需要将本仓库的项目下载后再通过 IDE 打开。
