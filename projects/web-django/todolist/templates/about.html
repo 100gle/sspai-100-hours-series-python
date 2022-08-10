@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+
+<article class="about">
+  <h1>{{ header }}</h1>
+  <section>
+    <p>
+      {% for content in about_content %}
+      {{ content }} <br />
+      {% endfor %}
+    </p>
+    <ul>
+      {% for item in items %}
+      <li>{{ item.0 }}：{{ item.1 }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+</article>
+{% endblock %}

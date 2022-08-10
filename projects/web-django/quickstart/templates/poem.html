@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>The Zen of Python</title>
+        <style>
+            figure {
+                display: block;
+                margin: auto;
+                width: 40%;
+            }
+            figure > figcaption {
+                text-align: center;
+            }
+            blockquote {
+                margin: 0;
+            }
+
+            blockquote p {
+                padding: 15px;
+                line-height: 1cm;
+                background: #eee;
+                border-radius: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        {% csrf_token %}
+        <figure>
+            <blockquote>
+                <p>
+                    {% for line in lines %} <i>{{ line }}</i><br />
+                    {% endfor %}
+                </p>
+            </blockquote>
+            <figcaption>
+                ——{{ author }}, <cite><b>{{ source }}</b></cite>
+            </figcaption>
+        </figure>
+    </body>
+</html>

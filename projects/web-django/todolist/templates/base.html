@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>
+    {% if title == "home" %}
+    Todolist Web App
+    {% else %}
+    Todolist Web App - {% block title %}{% endblock %}
+    {% endif %}
+  </title>
+  {% load static %}
+  <link rel="stylesheet" href={% static "css/simple-v1.min.css" %}>
+  <link rel="stylesheet" href={% static "css/style.css" %}>
+</head>
+
+<body>
+  <div class="container">
+    <nav class="navbar">
+      <ul>
+        <li>
+          <a href="https://sspai.com" class="logo">
+            <img src={% static "images/sspai-logo-light.svg" %} alt="logo">
+          </a>
+        </li>
+        <li><a href={% url "index" %}>Home</a></li>
+        <li><a href={% url "tasks" %}>Task</a></li>
+        <li><a href={% url "about" %}>About</a></li>
+      </ul>
+    </nav>
+    <hr />
+    <main>
+      {% block content %}
+      {% endblock %}
+    </main>
+    <footer id="footer">
+      <p class="copyright">&copy; 2022-Present 100gle & 少数派</p>
+    </footer>
+  </div>
+  <script type="text/javascript" src={% static "js/main.js" %}></script>
+</body>
+
+</html>
