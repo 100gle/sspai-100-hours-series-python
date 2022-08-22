@@ -43,9 +43,10 @@ class TestRename(unittest.TestCase):
 
     def test_rename(self):
         for (raw, expected) in self.cases:
-            file = rename(raw)
-            self.assertEquals(file, expected)
+            with self.subTest(raw=raw, expected=expected):
+                file = rename(raw)
+                self.assertEqual(file, expected)
 
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(verbosity=2)
