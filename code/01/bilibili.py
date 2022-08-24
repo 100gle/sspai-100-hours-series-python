@@ -108,10 +108,10 @@ async def fetch_stats(bvid: str, asess) -> APIData:
         info["rank"] = has_rank.text.strip()
 
     try:
-        info["like"] = html.find(".ops .like", first=True).text.strip()
-        info["coin"] = html.find(".ops .coin", first=True).text.strip()
-        info["collect"] = html.find(".ops .collect", first=True).text.strip()
-        info["share"] = html.find(".ops .share", first=True).text.strip()
+        info["like"] = html.find(".toolbar-left .like", first=True).text.strip()
+        info["coin"] = html.find(".toolbar-left .coin", first=True).text.strip()
+        info["collect"] = html.find(".toolbar-left .collect", first=True).text.strip()
+        info["share"] = html.find(".toolbar-left .share", first=True).text.strip()
     except AttributeError:
         log.warning(f"cant' get stats from '{bvid}', use default.")
         return {k: "" for k in stats}

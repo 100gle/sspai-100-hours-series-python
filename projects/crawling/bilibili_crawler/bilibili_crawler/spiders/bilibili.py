@@ -49,15 +49,14 @@ class BilibiliSpider(scrapy.Spider):
         loader = DefaultLoader(
             item=VideoData(), response=response, selector=response.selector
         )
-        loader.add_css("like", ".ops .like::text")
-        loader.add_css("coin", ".ops .coin::text")
-        loader.add_css("collect", ".ops .collect::text")
-        loader.add_css("share", ".ops .share::text")
-        loader.add_css("rank", ".video-data .rank::text")
+        loader.add_css("like", ".toolbar-left .like .info-text::text")
+        loader.add_css("coin", ".toolbar-left .coin .info-text::text")
+        loader.add_css("collect", ".toolbar-left .collect .info-text::text")
+        loader.add_css("share", ".toolbar-left .share .info-text::text")
+        loader.add_css("rank", ".video-data .honor-text::text")
         video_data = loader.load_item()
 
         data = dict(**api_data, **video_data)
-
         yield data
 
 
