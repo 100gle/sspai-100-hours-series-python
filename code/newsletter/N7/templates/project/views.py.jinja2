@@ -1,0 +1,8 @@
+from fastapi import APIRouter
+
+router = APIRouter(prefix="/{{ app_name }}/api")
+
+
+@router.get("/")
+async def index():
+    return {"msg": "Hello, world"}

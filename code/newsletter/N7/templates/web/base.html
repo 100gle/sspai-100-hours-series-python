@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <style>
+        .app {
+            padding: 0;
+            margin: 0 auto;
+            box-sizing: border-box;
+            font-size: 1.5rem;
+            width: 1080px;
+        }
+        .halo {
+            font-weight: 600;
+            font-size: 2rem;
+        }
+        .data {
+            border-collapse: collapse;
+            width: 100%;
+            text-align: center;
+        }
+        .data th, .data td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <p class="halo">👋 Halo! Welcome to my website!</p>
+        {% block body %}{% endblock %}
+    </div>
+</body>
+</html>
