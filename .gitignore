@@ -268,3 +268,5 @@ nohup.out
 
 # sqlite
 *.sqlite3
+!projects/**/*.sqlite3
+!code/**/*.sqlite3
