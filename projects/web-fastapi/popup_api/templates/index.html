@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todolist</title>
+  <link rel="stylesheet" href="../static/css/simple-v1.min.css" />
+  <link rel="stylesheet" href="../static/css/style.css" />
+</head>
+
+<body>
+  <div class="container">
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://sspai.com" class="logo"><img src="../static/sspai-logo-light.svg" alt="logo"></a>
+        </li>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Task</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+    </nav>
+    <hr />
+    <div class="data-table">
+      <p v-if="tasks.length === 0">
+        🤔 Whoops……似乎任务都做完了？那么可以点击下方的按钮添加任务！
+      </p>
+      <table v-else>
+        <!-- Fields -->
+        <thead>
+          <tr>
+            <th v-for="field, index in fields" :key="index" scope="col">
+              [[ mappingFields(field) ]]
+            </th>
+          </tr>
+        </thead>
+        <!-- Data -->
+        <tbody>
+          <tr v-for="task in tasks">
+            <td>[[ task.id ]]</td>
+            <td>[[ task.name ]]</td>
+            <td>[[ mappingPriority(task.priority) ]]</td>
+            <td>[[ task.description ]]</td>
+            <td>[[ isDone(task.is_done) ]]</td>
+            <td>[[ mappingGroups(task.group_id) ]]</td>
+            <td>
+              <div class="ops">
+                <span @click="updateTask(task.id)">更新</span>
+                <span @click="deleteTask(task.id)">删除</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="btn-add-task" @click="showForm">
+      <button>+</button>
+    </div>
+    <div class="task-form">
+      <form v-bind:action="apis.createTask" method="post" class="form">
+        <div>
+          <label for="taskName">任务名称：</label>
+          <input type="text" name="taskName" id="taskName" placeholder="请输入待办事项名称" />
+        </div>
+        <div>
+          <label for="taskPriority">优先级：</label>
+          <select name="taskPriority" id="taskPriority">
+            <option value="1" selected>一般</option>
+            <option value="2">优先</option>
+            <option value="3">紧急</option>
+          </select>
+        </div>
+        <div>
+          <label for="taskGroup"> 分组： </label>
+          <select name="taskGroup" id="taskGroup">
+            <option :value="index" v-for="([index, group]) in Object.entries(groups)">
+              [[ group ]]
+            </option>
+          </select>
+        </div>
+        <div>
+          <label for="taskDescription">任务备注：</label>
+          <textarea name="taskDescription" id="taskDescription" rows="5" placeholder="备注内容（可选）"></textarea>
+        </div>
+        <div class="btn-submit">
+          <input ref="submit" type="submit" value="添加" />
+        </div>
+      </form>
+    </div>
+    <footer id="footer">
+      <p class="copyright">&copy; 100gle & sspai</p>
+    </footer>
+  </div>
+</body>
+<script src="../static/js/vue.min.js"></script>
+<script src="../static/js/axios.min.js"></script>
+<script>
+  const address = "http://localhost:8000";
+  const app = new Vue({
+    el: ".container",
+    delimiters: ["[[", "]]"],
+    data() {
+      return {
+        tasks: [],
+        fields: [],
+        apis: {
+          getAllTasks: `${address}/api/tasks`,
+          createTask: `${address}/api/tasks/create`,
+          updateTask: `${address}/api/tasks/update`,
+          deleteTask: `${address}/api/tasks/delete`,
+          getGroups: `${address}/api/groups`
+        },
+        groups: [],
+      }
+    },
+    methods: {
+      showForm(e) {
+        const formDiv = document.querySelector(".task-form");
+        if (formDiv.style.display === "") {
+          formDiv.style.display = "none";
+        }
+        formDiv.style.display = formDiv.style.display === "none" ? "flex" : "none";
+      },
+      getAllTasks() {
+        axios.get(this.apis.getAllTasks)
+          .then(res => {
+            let json = res.data.data
+            this.tasks = json
+
+            let fields = Object.keys(json[0])
+            fields.push("operators")
+
+            this.fields = fields
+          })
+          .catch(err => console.error)
+      },
+      updateTask(task_id) {
+        axios.put(`${this.apis.updateTask}/${task_id}`).then(res => {
+          this.getAllTasks();
+        })
+      },
+      deleteTask(task_id) {
+        axios.delete(`${this.apis.deleteTask}/${task_id}`).then(res => {
+          this.getAllTasks();
+        })
+      },
+      mappingFields(field) {
+        let mapping = {
+          id: "序号",
+          name: "任务名称",
+          priority: "优先级",
+          description: "任务描述",
+          is_done: "是否完成",
+          group_id: "分组",
+          operators: "操作",
+        }
+        return mapping[field];
+      },
+      isDone(done) {
+        return done === 1 ? "完成" : "未完成"
+      },
+      mappingPriority(value) {
+        let mapping = {
+          0: "一般",
+          1: "优先",
+          3: "紧急"
+        }
+        return mapping[value]
+      },
+      mappingGroups(value) {
+        return this.groups[value]
+      },
+      getGroups() {
+        axios.get(this.apis.getGroups)
+          .then(res => {
+            let data = res.data.data
+            let mappings = {}
+            data.reduce((id, group) => {
+              Object.assign(mappings, {
+                [group.id]: group.name
+              })
+            }, {})
+
+            this.groups = mappings
+          })
+          .catch(err => console.error)
+      },
+    },
+    mounted: function (e) {
+      this.getAllTasks();
+      this.getGroups();
+    }
+  })
+</script>
+
+</html>

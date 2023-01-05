@@ -1,0 +1,123 @@
+.container {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* navbar */
+.navbar ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  list-style: none;
+  padding-left: 0;
+}
+
+.navbar a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.navbar a:hover {
+  color: goldenrod !important;
+}
+
+/* data table */
+.data-table {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+}
+.data-table th,
+.data-table td {
+  text-align: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+.data-table th:first-child {
+  width: 5%;
+}
+
+.data-table th:nth-child(2) {
+  width: 15%;
+}
+
+.data-table th:nth-child(4) {
+  width: 30%;
+}
+
+.data-table td[class="ops"] {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.data-table .ops span {
+  display: block;
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.btn-add-task {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.btn-add-task > button {
+  display: block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 20px;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.btn-add-task > button:hover {
+  background-color: rgb(204, 77, 77);
+}
+
+.task-form {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+.form {
+  display: block;
+  width: 80%;
+}
+
+.form > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  vertical-align: middle;
+}
+
+.form .btn-submit {
+  text-align: center;
+  transition: 0.1ms;
+}
+
+.form .btn-submit > input {
+  display: block;
+  width: 100%;
+  font-size: 20px;
+  transition: 0.1ms;
+}
+
+#taskDescription {
+  width: 60% !important;
+  resize: none !important;
+}
+
+/* footer */
+#footer {
+  text-align: center;
+}
