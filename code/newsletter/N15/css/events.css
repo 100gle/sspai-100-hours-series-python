@@ -1,0 +1,16 @@
+#display-container {
+    layout: grid;
+    grid-size: 2 2;
+    align: center middle;
+
+    background: grey;
+    border: solid white;
+    margin: 1;
+    height: 100%;
+}
+
+.block {
+    content-align: center middle;
+    width: 100%;
+    margin: 2;
+}
